@@ -3,9 +3,9 @@
 Welcome to the Kard Postman Collection! Use this collection for a quick and easy way to get started working in the Kard sandbox environment.
 
 ## Table of Contents
-- [How it Works](https://github.com/kard-financial/kard-postman/edit/main/README.md#how-it-works)
-- [Recommended Integration Patterns](https://github.com/kard-financial/kard-postman/edit/main/README.md#recommended-integration-patterns)
-- [Recommended User Experiences](https://github.com/kard-financial/kard-postman/edit/main/README.md#recommended-user-experiences)
+- [How it Works](#how-it-works)
+- [Recommended Integration Patterns](#recommended-integration-patterns)
+- [Recommended User Experiences](#recommended-user-experiences)
 
 # How it Works
 
