@@ -137,11 +137,11 @@ Add cardInfo to User:
 ## [C. Transaction CLO Matching](https://developer.getkard.com/#operation/incomingTransactionEndpoint)
 
 The three primary patterns used to send transactions to Kard for matching processing are:
-1. [Dual Message](https://github.com/kard-financial/kard-postman/edit/main/README.md#i-dual-message)
-2. [Single Message](https://github.com/kard-financial/kard-postman/edit/main/README.md#ii-single-message)
-3. [One Authorization to Many Settlements](https://github.com/kard-financial/kard-postman/edit/main/README.md#iii-one-authorization-to-many-settlements)
+1. [Dual Message](#i-dual-message)
+2. [Single Message](#ii-single-message)
+3. [One Authorization to Many Settlements](#iii-one-authorization-to-many-settlements)
 
-To properly ingest a matched transaction earned reward webhook, check out the section on [HMAC Signature Verification](https://github.com/kard-financial/kard-postman/edit/main/README.md#iv-hmac-signature-verification).
+To properly ingest a matched transaction earned reward webhook, check out the section on [HMAC Signature Verification](#iv-hmac-signature-verification).
  
 The following are descriptions and code recipes for each pattern.
 
@@ -395,8 +395,8 @@ app.listen(port, () => {
 # Recommended User Experiences
 ## A. Trigger an Earned Reward Webhook
 The following steps provide a demo experience from the perspective of a new cardholder. If the cardholder is already enrolled in the rewards program, then skip step 1.
-1. [Create User](https://github.com/kard-financial/kard-postman/edit/main/README.md#a-cardholders).
-2. [Discover Eligible Offers](https://github.com/kard-financial/kard-postman/edit/main/README.md#b-merchant-offers-coming-soon).  
+1. [Create User](#a-cardholders).
+2. [Discover Eligible Offers](#b-merchant-offers-coming-soon).  
 Code Recipe: 
 - `GET` [Reward Merchants](https://developer.getkard.com/#operation/getRewardsMerchants) Endpoint
 - merchant `"source": "NATIONAL"`
@@ -418,7 +418,7 @@ Code Recipe:
         "offers": ...
     },
 ```
-3. [Submit Eligible Transaction](https://github.com/kard-financial/kard-postman/edit/main/README.md#c-transaction-clo-matching).  
+3. [Submit Eligible Transaction](#c-transaction-clo-matching).  
 Code Recipe: 
 - `POST` [Incoming Transactions](https://developer.getkard.com/#operation/incomingTransactionEndpoint) Endpoint
 - Rewards Merchant `name` field maps to Incoming Transaction `description`
@@ -438,6 +438,6 @@ Code Recipe:
 4. Ingest Earned Reward Webhook.   
 Code Recipe: 
 - `POST` [Issuer Earned Reward Webhook](https://developer.getkard.com/#operation/issuerEarnedRewardWebhook) Endpoint
-- Authenticate webhook using [HMAC Signature Verification](https://github.com/kard-financial/kard-postman/edit/main/README.md#iv-hmac-signature-verification)
+- Authenticate webhook using [HMAC Signature Verification](#iv-hmac-signature-verification)
 - Delight your cardholder with a notification!   
 ![example-earned-reward-notification](https://assets-global.website-files.com/6182d563d3a1261e724c788d/62603f4cf63fa3366c9ea9ea_ayXuXpbASOzI5PD9AQQqf623qIryIWohMg0yo9fEd6AN2g3G2oyjYUcUTKmgmX5V6ErxCM_7zD2LU7gZ-4b4AyH2hiUyhWj2888LJzfcwx4HkurkK6x0rWg2JiiKbFe_zq-9aTXJ.png)
