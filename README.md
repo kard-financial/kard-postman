@@ -5,7 +5,7 @@ Welcome to the Kard Postman Collection! Use this collection for a quick and easy
 ## Table of Contents
 - [How it Works](https://github.com/kard-financial/kard-postman/edit/main/README.md#how-it-works)
 - [Recommended Integration Patterns](https://github.com/kard-financial/kard-postman/edit/main/README.md#recommended-integration-patterns)
-- [Recommended User Experiences (Coming Soon!)](https://github.com/kard-financial/kard-postman/edit/main/README.md#recommended-user-experiences)
+- [Recommended User Experiences](https://github.com/kard-financial/kard-postman/edit/main/README.md#recommended-user-experiences)
 
 # How it Works
 
@@ -137,9 +137,11 @@ Add cardInfo to User:
 ## [C. Transaction CLO Matching](https://developer.getkard.com/#operation/incomingTransactionEndpoint)
 
 The three primary patterns used to send transactions to Kard for matching processing are:
-1. Dual Message
-2. Single Message
-3. One Authorization to Many Settlements
+1. [Dual Message](https://github.com/kard-financial/kard-postman/edit/main/README.md#i-dual-message)
+2. [Single Message](https://github.com/kard-financial/kard-postman/edit/main/README.md#ii-single-message)
+3. [One Authorization to Many Settlements](https://github.com/kard-financial/kard-postman/edit/main/README.md#iii-one-authorization-to-many-settlements)
+
+To properly ingest a matched transaction earned reward webhook, check out the section on [HMAC Signature Verification](https://github.com/kard-financial/kard-postman/edit/main/README.md#iv-hmac-signature-verification).
  
 The following are descriptions and code recipes for each pattern.
 
@@ -151,7 +153,7 @@ The most common pattern used to transmit transactions is the Dual Message system
 2. Final Transaction Event: SETTLED, REVERSED, DECLINED, RETURNED*  
 *special case where the originating, temporary transaction ID is not readily identifiable
 
-Code Recipe:
+Code Recipe: Cleared, Signature Debit Transaction
 
 Temporary transaction event:
 - status: APPROVED
@@ -188,11 +190,50 @@ Final transaction event:
 }
 ```
 
+
+Code Recipe: Reversed, Signature Debit Transaction    
+*Sending Reversal infomration enables the platform's Transaction Monitoring, where Kard conducts internal fraud detection to identify suspicious behavior through abnormal transaction amounts and high volume transactions or returns per cardholder on a daily basis. We then notify Issuers of any potential fraud to be investigated if it is found.*
+
+Temporary transaction event:
+- status: APPROVED
+- authorizationDate timestamp
+```
+{
+   "transactionId": "sandbox-web-303",
+   "referringPartnerUserId": "438103",
+   "cardBIN": "123456",
+   "cardLastFour": "4321",
+   "amount": 10000,
+   "currency": "USD",
+   "description": "Hilltop BBQ",
+   "status": "APPROVED",
+   "authorizationDate": "2022-10-29T17:48:06.135Z"
+}
+```
+
+Final transaction event:
+- status: REVERSED
+- settledDate timestamp
+- identical transactionId as the originating APPROVED event
+```
+{
+   "transactionId": "sandbox-web-303",
+   "referringPartnerUserId": "438103",
+   "cardBIN": "123456",
+   "cardLastFour": "4321",
+   "amount": 10000,
+   "currency": "USD",
+   "description": "Hilltop BBQ",
+   "status": "REVERSED",
+   "settledDate": "2022-10-30T17:48:06.135Z"
+}
+```
+
 ### II. Single Message
 
 Another common pattern used to transmit transactions is the Single Message system, also known as a PIN debit transaction. In these transactions, the cardholder is required to enter a PIN. The PIN is validated in real-time by the bank, so a transaction submitted as a single message will be a final transaction event and the authorization and settlement dates are effectively the same.
 
-Code Recipe: 
+Code Recipe: Clearing, PIN debit Transaction
 - status: SETTLED
 - authorizationDate timestamp
 - settledDate timestamp
@@ -217,7 +258,7 @@ The last pattern is one where a single authorization is followed by multiple set
 
 For example, imagine using an e-commerce site and checking out a cart with multiple items. If these items are shipped individually, there may be multiple, subsequent settlement events.
 
-Code Recipe: 
+Code Recipe: Single Auth, Multiple Settlements Transaction
 - identical referringPartnerUserId for all events
 - identical transactionId for all events
 - different settledDate timestamps for each SETTLED event
@@ -284,7 +325,7 @@ The following is a Node.js code recipe that shows one approach to:
 1. Stand up a service to ingest an earned reward webhook
 2. Implement HMAC signature verification
 
-Code Recipe: 
+Code Recipe: Authenticating, then Ingesting an Earned Reward Webhook
 - `auth.js`: signature verification middleware 
 - `index.js`: POST endpoint
 
@@ -352,4 +393,51 @@ app.listen(port, () => {
 ```
 
 # Recommended User Experiences
-Coming soon!
+## A. Trigger an Earned Reward Webhook
+The following steps provide a demo experience from the perspective of a new cardholder. If the cardholder is already enrolled in the rewards program, then skip step 1.
+1. [Create User](https://github.com/kard-financial/kard-postman/edit/main/README.md#a-cardholders).
+2. [Discover Eligible Offers](https://github.com/kard-financial/kard-postman/edit/main/README.md#b-merchant-offers-coming-soon).  
+Code Recipe: 
+- `GET` [Reward Merchants](https://developer.getkard.com/#operation/getRewardsMerchants) Endpoint
+- merchant `"source": "NATIONAL"`
+```
+    {
+        "_id": "629f6fa4b5df7700096f884a",
+        "name": "Hilltop BBQ",
+        "description": "Hilltop Bar B Que offers home-cooked, Alabama-style BBQ in 50 locations across the US...",
+        "source": "NATIONAL",
+        "category": "Food & Beverage",
+        "imgUrl": "https://assets.getkard.com/public/logos/kard.jpg",
+        "bannerImgUrl": "https://assets.getkard.com/public/banners/kard.jpg",
+        "websiteURL": "https://www.kardhilltopbbq.com",
+        "acceptedCards": [
+            "VISA",
+            "MASTERCARD",
+            "AMERICAN EXPRESS"
+        ],
+        "offers": ...
+    },
+```
+3. [Submit Eligible Transaction](https://github.com/kard-financial/kard-postman/edit/main/README.md#c-transaction-clo-matching).  
+Code Recipe: 
+- `POST` [Incoming Transactions](https://developer.getkard.com/#operation/incomingTransactionEndpoint) Endpoint
+- Rewards Merchant `name` field maps to Incoming Transaction `description`
+```
+{
+   "transactionId": "sandbox-web-303",
+   "referringPartnerUserId": "438103",
+   "cardBIN": "123456",
+   "cardLastFour": "4321",
+   "amount": 10000,
+   "currency": "USD",
+   "description": "Hilltop BBQ",
+   "status": "APPROVED",
+   "authorizationDate": "2022-10-29T17:48:06.135Z"
+}
+```
+4. Ingest Earned Reward Webhook.   
+Code Recipe: 
+- `POST` [Issuer Earned Reward Webhook](https://developer.getkard.com/#operation/issuerEarnedRewardWebhook) Endpoint
+- Authenticate webhook using [HMAC Signature Verification](https://github.com/kard-financial/kard-postman/edit/main/README.md#iv-hmac-signature-verification)
+- Delight your cardholder with a notification!   
+![example-earned-reward-notification](https://assets-global.website-files.com/6182d563d3a1261e724c788d/62603f4cf63fa3366c9ea9ea_ayXuXpbASOzI5PD9AQQqf623qIryIWohMg0yo9fEd6AN2g3G2oyjYUcUTKmgmX5V6ErxCM_7zD2LU7gZ-4b4AyH2hiUyhWj2888LJzfcwx4HkurkK6x0rWg2JiiKbFe_zq-9aTXJ.png)
