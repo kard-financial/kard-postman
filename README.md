@@ -153,7 +153,7 @@ The most common pattern used to transmit transactions is the Dual Message system
 2. Final Transaction Event: SETTLED, REVERSED, DECLINED, RETURNED*  
 *special case where the originating, temporary transaction ID is not readily identifiable
 
-Code Recipe: Cleared, Signature Debit Transaction
+#### Code Recipe: Cleared, Signature Debit Transaction
 
 Temporary transaction event:
 - status: APPROVED
