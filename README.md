@@ -233,7 +233,7 @@ Final transaction event:
 
 Another common pattern used to transmit transactions is the Single Message system, also known as a PIN debit transaction. In these transactions, the cardholder is required to enter a PIN. The PIN is validated in real-time by the bank, so a transaction submitted as a single message will be a final transaction event and the authorization and settlement dates are effectively the same.
 
-Code Recipe: Clearing, PIN debit Transaction
+### Code Recipe: Clearing, PIN debit Transaction
 - status: SETTLED
 - authorizationDate timestamp
 - settledDate timestamp
