@@ -213,7 +213,7 @@ Temporary transaction event:
 
 Final transaction event:
 - status: REVERSED
-- settledDate timestamp
+- transactionDate timestamp
 - identical transactionId as the originating APPROVED event
 ```
 {
@@ -225,7 +225,7 @@ Final transaction event:
    "currency": "USD",
    "description": "Hilltop BBQ",
    "status": "REVERSED",
-   "settledDate": "2022-10-30T17:48:06.135Z"
+   "transactionDate": "2022-10-30T17:48:06.135Z"
 }
 ```
 
