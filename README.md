@@ -6,9 +6,8 @@ Welcome to the Kard Postman Collection! Use this collection for a quick and easy
 - [How it Works](#how-it-works)
 - [Recommended Integration Patterns](#recommended-integration-patterns)
    - [Cardholders](https://github.com/kard-financial/kard-postman#a-cardholders)
-   - [Merchant Offers](https://github.com/kard-financial/kard-postman#b-merchant-offers-coming-soon)
+   - [Eligible Offers](https://github.com/kard-financial/kard-postman#b-merchant-offers-coming-soon)
    - [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching)
-   - [User Acceptance Test Cases]()
 - [Recommended User Experiences](#recommended-user-experiences)
    - [Enroll a User in Your Rewards Program]()
    - [Discover a New Customer CLO]()
@@ -16,7 +15,7 @@ Welcome to the Kard Postman Collection! Use this collection for a quick and easy
    - [Discover a Local CLO]()   
    - [Trigger an Earned Reward Webhook for an Authorization Event]()
    - [Trigger an Earned Reward Webhook for a Settled Event]()
-
+- [User Acceptance Test Cases]()
 # How it Works
 
 ### I. Set up the Collection
@@ -139,6 +138,9 @@ Add cardInfo to User:
   }
 }
 ```
+
+### III. Issuers + Aggregators
+Your application supports cards issued by your program manager as well as cards your members want to link your program. You will be provided 1 Issuer environment (for issued cards) and 1 Aggregator environment (for linked cards), and manage the integration of these environments to your application environment.
 
 ## [B. Merchant Offers (Coming Soon!)](https://developer.getkard.com/#tag/Merchant)
 
@@ -451,3 +453,35 @@ Code Recipe:
 - Authenticate webhook using [HMAC Signature Verification](#iv-hmac-signature-verification)
 - Delight your cardholder with a notification!   
 ![example-earned-reward-notification](https://assets-global.website-files.com/6182d563d3a1261e724c788d/62603f4cf63fa3366c9ea9ea_ayXuXpbASOzI5PD9AQQqf623qIryIWohMg0yo9fEd6AN2g3G2oyjYUcUTKmgmX5V6ErxCM_7zD2LU7gZ-4b4AyH2hiUyhWj2888LJzfcwx4HkurkK6x0rWg2JiiKbFe_zq-9aTXJ.png)
+
+
+# User Acceptance Test Cases
+**As a cardholder, I should be able to successfully:**
+ - Enroll in the rewards program.
+ - Unenroll from the rewards program.
+ - Add a card to my profile.
+ - View a list of eligible ONLINE rewards.
+ - View a list of eligible INSTORE rewards.
+ - View a list of eligible rewards near me.
+ - View Offer Details.
+ - Submit a Clearing, Dual Message Transaction.
+    - Submit an APPROVED(aka AUTH) event to the Incoming Transactions Endpoint 
+    - Submit a SETTLED (aka CLEARED) event to the Incoming Transactions Endpoint
+ - Submit a Declined, Dual Message Transaction.
+    - Submit an APPROVED(aka AUTH) event to the Incoming Transactions Endpoint 
+    - Submit a DECLINED event to the Incoming Transactions Endpoint
+ - Submit a Reversed, Dual Message Transaction.
+   - Submit an APPROVED(aka AUTH) event to the Incoming Transactions Endpoint
+   - Submit a REVERSED (aka CLEARED) event to the Incoming Transactions Endpoint
+ - Submit a Single Message, PIN-debit Transaction.
+   - Submit a SETTLED (aka CLEARED) event to the Incoming Transactions Endpoint
+ - Submit a Refund Transaction.
+   - Submit a RETURNED event to the Incoming Transactions Endpoint
+ - Receive an Earned Reward Webhook push notification
+
+**As a rewards program manager, I should be able to successfully:**
+ - Consume recon files.
+   - Daily
+   - Monthly
+ - Create an Audit Request.
+ - Get an Audit Request Status.
