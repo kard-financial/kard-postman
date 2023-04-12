@@ -5,7 +5,17 @@ Welcome to the Kard Postman Collection! Use this collection for a quick and easy
 ## Table of Contents
 - [How it Works](#how-it-works)
 - [Recommended Integration Patterns](#recommended-integration-patterns)
+   - [Cardholders](https://github.com/kard-financial/kard-postman#a-cardholders)
+   - [Merchant Offers](https://github.com/kard-financial/kard-postman#b-merchant-offers-coming-soon)
+   - [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching)
+   - [User Acceptance Test Cases]()
 - [Recommended User Experiences](#recommended-user-experiences)
+   - [Enroll a User in Your Rewards Program]()
+   - [Discover a New Customer CLO]()
+   - [Discover a Lapsed Customer CLO]()
+   - [Discover a Local CLO]()   
+   - [Trigger an Earned Reward Webhook for an Authorization Event]()
+   - [Trigger an Earned Reward Webhook for a Settled Event]()
 
 # How it Works
 
