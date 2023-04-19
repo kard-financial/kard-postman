@@ -10,7 +10,7 @@ Welcome to the Kard Postman Collection! Use this collection for a quick and easy
 # How it Works
 
 ### I. Set up the Collection
-- [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/21266479-95275e3b-b758-4ac9-9224-2a71f06eee87?action=collection%2Ffork&collection-url=entityId%3D21266479-95275e3b-b758-4ac9-9224-2a71f06eee87%26entityType%3Dcollection%26workspaceId%3Ded9de5ad-ef96-4c9d-b038-4ff97148ed91): click button to fork the collection
+- [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/21266479-fa039121-1fff-49f1-b689-708247f1543d?action=collection%2Ffork&collection-url=entityId%3D21266479-fa039121-1fff-49f1-b689-708247f1543d%26entityType%3Dcollection%26workspaceId%3Ded9de5ad-ef96-4c9d-b038-4ff97148ed91): click button to fork the collection
 - [Import postman_environment.json](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#importing-postman-data): provided by the Sales team, contains sensitive `clientHash` and `issuer_webhook_key` variables.
 
 ### [II. GET a Session Token](https://developer.getkard.com/#section/Authentication)
