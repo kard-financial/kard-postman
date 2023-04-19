@@ -6,7 +6,7 @@ Welcome to the Kard Postman Collection! Use this collection for a quick and easy
 - [How it Works](#how-it-works)
 - [Recommended Integration Patterns](#recommended-integration-patterns)
    - [Cardholders](https://github.com/kard-financial/kard-postman#a-cardholders)
-   - [Eligible Offers](https://github.com/kard-financial/kard-postman#b-merchant-offers-coming-soon)
+   - [Targeted Offers](https://github.com/kard-financial/kard-postman#b-targeted-offers)
    - [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching)
 - [Recommended User Experiences](#recommended-user-experiences)
    - [Enroll a User in Your Rewards Program]()
@@ -142,9 +142,18 @@ Add cardInfo to User:
 ### III. Issuers + Aggregators
 Your application supports cards issued by your program manager as well as cards your members want to link your program. You will be provided 1 Issuer environment (for issued cards) and 1 Aggregator environment (for linked cards), and manage the integration of these environments to your application environment.
 
-## [B. Merchant Offers (Coming Soon!)](https://developer.getkard.com/#tag/Merchant)
+## [B. Targeted Offers](https://docs.google.com/document/d/12LYpEv3xf6hmiKM7RW2Qbz8ZrMbeHGRIPJMTe606d_M/edit?usp=sharing)
 
+Personalized National CLOs, based on an individual cardholder's transaction history.
+1. [GET Eligible Merchants](https://developer.getkard.com/#operation/getEligibleRewardsMerchants)
+2. [GET Eligible Offers](https://developer.getkard.com/#operation/getEligibleRewardsOffers)
+3. [GET Eligible Locations](https://developer.getkard.com/#operation/getEligibleLocations)
 
+Each sandbox environment is configured with the following cardholder personas:
+- `sandbox-{issuerName}-new-customer`: this cardholder has no record of prior transactions at the merchant.
+- `sandbox-{issuerName}-lapsed-customer`: this cardholder has prior transaction history at the merchant, but none within the last 6 months.  
+
+These personas demonstrate targeting functionality in terms of offer discovery (the cardholder is viewing a personalized offer) and transaction matching (the cardholder transaction matches to the personalized offer). The `{issuerName}` variable is provided in the sandbox environment.json. 
 
 ## [C. Transaction CLO Matching](https://developer.getkard.com/#operation/incomingTransactionEndpoint)
 
