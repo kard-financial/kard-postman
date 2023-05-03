@@ -9,11 +9,11 @@ Welcome to the Kard Postman Collection! Use this collection for a quick and easy
    - [Targeted Offers](https://github.com/kard-financial/kard-postman#b-targeted-offers)
    - [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching)
 - [Recommended User Experiences](#recommended-user-experiences)
-   - [Discover a New Customer CLO]()
-   - [Discover a Lapsed Customer CLO]()
-   - [Discover a Local CLO]()   
-   - [Trigger an Earned Reward Webhook]()
-- [User Acceptance Test Cases]()
+   - [Discover a New Customer CLO](https://github.com/kard-financial/kard-postman#a-discover-a-new-customer-clo)
+   - [Discover a Lapsed Customer CLO](https://github.com/kard-financial/kard-postman#b-discover-a-lapsed-customer-clo)
+   - [Discover a Local CLO](https://github.com/kard-financial/kard-postman#c-discover-a-local-clo)   
+   - [Trigger an Earned Reward Webhook](https://github.com/kard-financial/kard-postman#d-trigger-an-earned-reward-webhook)
+- [User Acceptance Test Cases](https://github.com/kard-financial/kard-postman#user-acceptance-test-cases)
 # How it Works
 
 ### I. Set up the Collection
@@ -493,7 +493,7 @@ axios(config)
 ## D. Trigger an Earned Reward Webhook
 The following steps provide a demo experience from the perspective of the `sandbox-{issuerName}-new-customer` cardholder.  
 Code Recipe: 
-1. [Discover Eligible New Customer Offers]().  
+1. [Discover Eligible New Customer Offers](https://github.com/kard-financial/kard-postman#a-discover-a-new-customer-clo).  
 ```
     {
         "_id": "6409fa6d8a2a4300083d4143",
@@ -515,9 +515,8 @@ Code Recipe:
     },
 ```
 2. [Submit Eligible Transaction](#c-transaction-clo-matching).  
-Code Recipe: 
 - `POST` [Incoming Transactions](https://developer.getkard.com/#operation/incomingTransactionEndpoint) Endpoint
-- Map Rewards offer `merchant.name` field to Incoming Transaction `description` field
+- Map Rewards offer `merchant.name` to Incoming Transaction `description`
 ```
 {
    "transactionId": "sandbox-web-303",
@@ -531,8 +530,7 @@ Code Recipe:
    "authorizationDate": "2023-03-29T17:48:06.135Z"
 }
 ```
-4. Ingest Earned Reward Webhook.   
-Code Recipe: 
+3. Ingest Earned Reward Webhook.   
 - `POST` [Issuer Earned Reward Webhook](https://developer.getkard.com/#operation/issuerEarnedRewardWebhook) Endpoint
 - Authenticate webhook using [HMAC Signature Verification](#iv-hmac-signature-verification)
 - Delight your cardholder with a notification!   
