@@ -491,45 +491,43 @@ axios(config)
 ```
 
 ## D. Trigger an Earned Reward Webhook
-The following steps provide a demo experience from the perspective of a new cardholder. If the cardholder is already enrolled in the rewards program, then skip step 1.
-1. [Create User](#a-cardholders).
-2. [Discover Eligible Offers]().  
+The following steps provide a demo experience from the perspective of the `sandbox-{issuerName}-new-customer` cardholder.
 Code Recipe: 
-- `GET` [Reward Merchants](https://developer.getkard.com/#operation/getRewardsMerchants) Endpoint
-- merchant `"source": "NATIONAL"`
+1. [Discover Eligible New Customer Offers]().  
 ```
     {
-        "_id": "629f6fa4b5df7700096f884a",
-        "name": "Hilltop BBQ",
-        "description": "Hilltop Bar B Que offers home-cooked, Alabama-style BBQ in 50 locations across the US...",
+        "_id": "6409fa6d8a2a4300083d4143",
+        "isLocationSpecific": false,
+        "terms": "This offer is only valid for first-time customers.",
+        "redeemableOnce": false,
+        "name": "BaaS Pro Shops - New Customers",
+...
+        "merchant": {
+            "_id": "6409f118705b8a000834f23d",
+            "description": "Trusted source for all products debit, credit, crypto, and more. In business since 2011, shop online or swing by our store!",
+...
+            "name": "BaaS Pro Shops",
+            "bannerImgUrl": "https://assets.getkard.com/public/banners/kard.jpg"
+        },
         "source": "NATIONAL",
-        "category": "Food & Beverage",
-        "imgUrl": "https://assets.getkard.com/public/logos/kard.jpg",
-        "bannerImgUrl": "https://assets.getkard.com/public/banners/kard.jpg",
-        "websiteURL": "https://www.kardhilltopbbq.com",
-        "acceptedCards": [
-            "VISA",
-            "MASTERCARD",
-            "AMERICAN EXPRESS"
-        ],
-        "offers": ...
+        "totalCommission": 12
     },
 ```
-3. [Submit Eligible Transaction](#c-transaction-clo-matching).  
+2. [Submit Eligible Transaction](#c-transaction-clo-matching).  
 Code Recipe: 
 - `POST` [Incoming Transactions](https://developer.getkard.com/#operation/incomingTransactionEndpoint) Endpoint
-- Rewards Merchant `name` field maps to Incoming Transaction `description`
+- Map Rewards offer `merchant.name` field to Incoming Transaction `description` field
 ```
 {
    "transactionId": "sandbox-web-303",
-   "referringPartnerUserId": "438103",
+   "referringPartnerUserId": "sandbox-{issuerName}-new-customer",
    "cardBIN": "123456",
    "cardLastFour": "4321",
    "amount": 10000,
    "currency": "USD",
-   "description": "Hilltop BBQ",
+   "description": "BaaS Pro Shops",
    "status": "APPROVED",
-   "authorizationDate": "2022-10-29T17:48:06.135Z"
+   "authorizationDate": "2023-03-29T17:48:06.135Z"
 }
 ```
 4. Ingest Earned Reward Webhook.   
@@ -537,7 +535,7 @@ Code Recipe:
 - `POST` [Issuer Earned Reward Webhook](https://developer.getkard.com/#operation/issuerEarnedRewardWebhook) Endpoint
 - Authenticate webhook using [HMAC Signature Verification](#iv-hmac-signature-verification)
 - Delight your cardholder with a notification!   
-![example-earned-reward-notification](https://assets-global.website-files.com/6182d563d3a1261e724c788d/62603f4cf63fa3366c9ea9ea_ayXuXpbASOzI5PD9AQQqf623qIryIWohMg0yo9fEd6AN2g3G2oyjYUcUTKmgmX5V6ErxCM_7zD2LU7gZ-4b4AyH2hiUyhWj2888LJzfcwx4HkurkK6x0rWg2JiiKbFe_zq-9aTXJ.png)
+![example-earned-reward-notification](https://assets-global.website-files.com/6182d563d3a1261e724c788d/64076acd79c73585ead3e520_2Q4_C0BXnWNz2ldQI6lNBOcEOlIhsPPZLwhNYmLTDy7HiuopuUDLkmbkGoi3Hv80aYOY_fvKsNg5ZJx6BtfblkEQbtyZ9jgC8xpo3OiEJxpHfz4P6BhjMyM3LwRQH78i7vY2jkakjELh5JC4ENm2ezs.png)
 
 
 # User Acceptance Test Cases
