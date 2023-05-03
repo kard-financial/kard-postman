@@ -9,12 +9,10 @@ Welcome to the Kard Postman Collection! Use this collection for a quick and easy
    - [Targeted Offers](https://github.com/kard-financial/kard-postman#b-targeted-offers)
    - [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching)
 - [Recommended User Experiences](#recommended-user-experiences)
-   - [Enroll a User in Your Rewards Program]()
    - [Discover a New Customer CLO]()
    - [Discover a Lapsed Customer CLO]()
-   - [Discover a Local CLO]()   
-   - [Trigger an Earned Reward Webhook for an Authorization Event]()
-   - [Trigger an Earned Reward Webhook for a Settled Event]()
+   - [Discover a CLO]()   
+   - [Trigger an Earned Reward Webhook]()
 - [User Acceptance Test Cases]()
 # How it Works
 
@@ -89,7 +87,7 @@ axios(config)
 ## [A. Cardholders](https://developer.getkard.com/#tag/Users)
 
 ### I. Aggregators
-Your application allows cardholders to register cards from other programs. In general, the cardholder cardBIN is not known at rewards program program inception, so the UI must capture cardBIN and cardLastFour when the user is being created.
+Your application allows cardholders to link cards from other programs. As a result, transactions may originate from a variety of different card networks, so the UI must capture cardBIN and cardLastFour when the user is being created.
 
 Code Recipe:
 
@@ -111,7 +109,7 @@ Creating a User with cardInfo object:
 ```
 
 ### II. Issuers
-Your application supports only cards issued by your program manager. In general, the cardBIN is known at the rewards program inception so a user can be created with or without card-level information. If creating without the cardInfo object, the user can later be updated.
+Your application supports only cards issued by your program manager. As a result, transactions will originate from known cardBINs and networks so a user can be created with or without card-level information. If creating without the cardInfo object, the user can later be updated.
 
 Code Recipe:
 
@@ -140,7 +138,7 @@ Add cardInfo to User:
 ```
 
 ### III. Issuers + Aggregators
-Your application supports cards issued by your program manager as well as cards your members want to link your program. You will be provided 1 Issuer environment (for issued cards) and 1 Aggregator environment (for linked cards), and manage the integration of these environments to your application environment.
+Your application supports cards issued by your program manager as well as  cards your members want to link to your program. You will be provided 1 Issuer environment (for issued cards) and 1 Aggregator environment (for linked cards), and manage the integration of these environments to your application environment.
 
 ## [B. Targeted Offers](https://docs.google.com/document/d/12LYpEv3xf6hmiKM7RW2Qbz8ZrMbeHGRIPJMTe606d_M/edit?usp=sharing)
 
@@ -414,10 +412,88 @@ app.listen(port, () => {
 ```
 
 # Recommended User Experiences
-## A. Trigger an Earned Reward Webhook
+## A. Discover a New Customer CLO
+Code Recipe: 
+- `GET` [Eligible Rewards Offers](https://developer.getkard.com/#operation/getEligibleRewardsOffers) Endpoint
+- `referringPartnerUserId` path param: `sandbox-{issuerName}-new-customer`
+```
+var axios = require('axios');
+
+var config = {
+  method: 'get',
+  url: 'https://test-rewards-api.getkard.com/rewards/merchant/offers/user/sandbox-{issuerName}-new-customer',
+  headers: { 
+    'Content-Type': 'application/json', 
+    'Authorization': 'redaced_token
+  }
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+
+```
+
+## B. Discover a Lapsed Customer CLO
+Code Recipe: 
+- `GET` [Eligible Rewards Offers](https://developer.getkard.com/#operation/getEligibleRewardsOffers) Endpoint
+- `referringPartnerUserId` path param: `sandbox-{issuerName}-lapsed-customer`
+```
+var axios = require('axios');
+
+var config = {
+  method: 'get',
+  url: 'https://test-rewards-api.getkard.com/rewards/merchant/offers/user/sandbox-{issuerName}-lapsed-customer',
+  headers: { 
+    'Content-Type': 'application/json', 
+    'Authorization': 'redaced_token
+  }
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+```
+
+## C. Discover a Local CLO
+Code Recipe: 
+- `GET` [Locations](https://developer.getkard.com/#operation/getLocations) Endpoint
+- `source` query param: `LOCAL`
+```
+var axios = require('axios');
+
+var config = {
+  method: 'get',
+  url: 'https://test-rewards-api.getkard.com/rewards/merchant/locations?source=LOCAL',
+  headers: { 
+    'Content-Type': 'application/json', 
+    'Authorization': 'redacted_token'
+  }
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+
+
+```
+
+## D. Trigger an Earned Reward Webhook
 The following steps provide a demo experience from the perspective of a new cardholder. If the cardholder is already enrolled in the rewards program, then skip step 1.
 1. [Create User](#a-cardholders).
-2. [Discover Eligible Offers](#b-merchant-offers-coming-soon).  
+2. [Discover Eligible Offers]().  
 Code Recipe: 
 - `GET` [Reward Merchants](https://developer.getkard.com/#operation/getRewardsMerchants) Endpoint
 - merchant `"source": "NATIONAL"`
