@@ -11,7 +11,7 @@ Welcome to the Kard Postman Collection! Use this collection for a quick and easy
 - [Recommended User Experiences](#recommended-user-experiences)
    - [Discover a New Customer CLO]()
    - [Discover a Lapsed Customer CLO]()
-   - [Discover a CLO]()   
+   - [Discover a Local CLO]()   
    - [Trigger an Earned Reward Webhook]()
 - [User Acceptance Test Cases]()
 # How it Works
