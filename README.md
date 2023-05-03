@@ -11,7 +11,7 @@ Welcome to the Kard Postman Collection! Use this collection for a quick and easy
 - [Recommended User Experiences](#recommended-user-experiences)
    - [Discover a New Customer CLO](https://github.com/kard-financial/kard-postman#a-discover-a-new-customer-clo)
    - [Discover a Lapsed Customer CLO](https://github.com/kard-financial/kard-postman#b-discover-a-lapsed-customer-clo)
-   - [Discover a Local CLO](https://github.com/kard-financial/kard-postman#c-discover-a-local-clo)   
+   - [Discover CLOs Near You (Map View)](https://github.com/kard-financial/kard-postman#c-discover-a-local-clo)   
    - [Trigger an Earned Reward Webhook](https://github.com/kard-financial/kard-postman#d-trigger-an-earned-reward-webhook)
 - [User Acceptance Test Cases](https://github.com/kard-financial/kard-postman#user-acceptance-test-cases)
 # How it Works
@@ -463,7 +463,7 @@ axios(config)
 });
 ```
 
-## C. Discover a Local CLO
+## C. Discover CLOs Near You (Map View)
 Code Recipe: 
 - `GET` [Locations](https://developer.getkard.com/#operation/getLocations) Endpoint
 - `source` query param: `LOCAL`
