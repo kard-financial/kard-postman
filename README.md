@@ -491,7 +491,7 @@ axios(config)
 ```
 
 ## D. Trigger an Earned Reward Webhook
-The following steps provide a demo experience from the perspective of the `sandbox-{issuerName}-new-customer` cardholder.
+The following steps provide a demo experience from the perspective of the `sandbox-{issuerName}-new-customer` cardholder.  
 Code Recipe: 
 1. [Discover Eligible New Customer Offers]().  
 ```
@@ -504,7 +504,8 @@ Code Recipe:
 ...
         "merchant": {
             "_id": "6409f118705b8a000834f23d",
-            "description": "Trusted source for all products debit, credit, crypto, and more. In business since 2011, shop online or swing by our store!",
+            "description": "Trusted source for all products debit, credit, crypto, and more. 
+                             In business since 2011, shop online or swing by our store!",
 ...
             "name": "BaaS Pro Shops",
             "bannerImgUrl": "https://assets.getkard.com/public/banners/kard.jpg"
