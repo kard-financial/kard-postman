@@ -5,8 +5,15 @@ Welcome to the Kard Postman Collection! Use this collection for a quick and easy
 ## Table of Contents
 - [How it Works](#how-it-works)
 - [Recommended Integration Patterns](#recommended-integration-patterns)
+   - [Cardholders](https://github.com/kard-financial/kard-postman#a-cardholders)
+   - [Targeted Offers](https://github.com/kard-financial/kard-postman#b-targeted-offers)
+   - [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching)
 - [Recommended User Experiences](#recommended-user-experiences)
-
+   - [Discover a New Customer CLO]()
+   - [Discover a Lapsed Customer CLO]()
+   - [Discover a Local CLO]()   
+   - [Trigger an Earned Reward Webhook]()
+- [User Acceptance Test Cases]()
 # How it Works
 
 ### I. Set up the Collection
@@ -80,7 +87,7 @@ axios(config)
 ## [A. Cardholders](https://developer.getkard.com/#tag/Users)
 
 ### I. Aggregators
-Your application allows cardholders to register cards from other programs. In general, the cardholder cardBIN is not known at rewards program program inception, so the UI must capture cardBIN and cardLastFour when the user is being created.
+Your application allows cardholders to link cards from other programs. As a result, transactions may originate from a variety of different card networks, so the UI must capture cardBIN and cardLastFour when the user is being created.
 
 Code Recipe:
 
@@ -102,7 +109,7 @@ Creating a User with cardInfo object:
 ```
 
 ### II. Issuers
-Your application supports only cards issued by your program manager. In general, the cardBIN is known at the rewards program inception so a user can be created with or without card-level information. If creating without the cardInfo object, the user can later be updated.
+Your application supports only cards issued by your program manager. As a result, transactions will originate from known cardBINs and networks so a user can be created with or without card-level information. If creating without the cardInfo object, the user can later be updated.
 
 Code Recipe:
 
@@ -130,9 +137,21 @@ Add cardInfo to User:
 }
 ```
 
-## [B. Merchant Offers (Coming Soon!)](https://developer.getkard.com/#tag/Merchant)
+### III. Issuers + Aggregators
+Your application supports cards issued by your program manager as well as  cards your members want to link to your program. You will be provided 1 Issuer environment (for issued cards) and 1 Aggregator environment (for linked cards), and manage the integration of these environments to your application environment.
 
+## [B. Targeted Offers](https://docs.google.com/document/d/12LYpEv3xf6hmiKM7RW2Qbz8ZrMbeHGRIPJMTe606d_M/edit?usp=sharing)
 
+Personalized National CLOs, based on an individual cardholder's transaction history.
+1. [GET Eligible Merchants](https://developer.getkard.com/#operation/getEligibleRewardsMerchants)
+2. [GET Eligible Offers](https://developer.getkard.com/#operation/getEligibleRewardsOffers)
+3. [GET Eligible Locations](https://developer.getkard.com/#operation/getEligibleLocations)
+
+Each sandbox environment is configured with the following cardholder personas:
+- `sandbox-{issuerName}-new-customer`: this cardholder has no record of prior transactions at the merchant.
+- `sandbox-{issuerName}-lapsed-customer`: this cardholder has prior transaction history at the merchant, but none within the last 6 months.  
+
+These personas demonstrate targeting functionality in terms of offer discovery (the cardholder is viewing a personalized offer) and transaction matching (the cardholder transaction matches to the personalized offer). The `{issuerName}` variable is provided in the sandbox environment.json. 
 
 ## [C. Transaction CLO Matching](https://developer.getkard.com/#operation/incomingTransactionEndpoint)
 
@@ -393,46 +412,123 @@ app.listen(port, () => {
 ```
 
 # Recommended User Experiences
-## A. Trigger an Earned Reward Webhook
-The following steps provide a demo experience from the perspective of a new cardholder. If the cardholder is already enrolled in the rewards program, then skip step 1.
-1. [Create User](#a-cardholders).
-2. [Discover Eligible Offers](#b-merchant-offers-coming-soon).  
+## A. Discover a New Customer CLO
 Code Recipe: 
-- `GET` [Reward Merchants](https://developer.getkard.com/#operation/getRewardsMerchants) Endpoint
-- merchant `"source": "NATIONAL"`
+- `GET` [Eligible Rewards Offers](https://developer.getkard.com/#operation/getEligibleRewardsOffers) Endpoint
+- `referringPartnerUserId` path param: `sandbox-{issuerName}-new-customer`
+```
+var axios = require('axios');
+
+var config = {
+  method: 'get',
+  url: 'https://test-rewards-api.getkard.com/rewards/merchant/offers/user/sandbox-{issuerName}-new-customer',
+  headers: { 
+    'Content-Type': 'application/json', 
+    'Authorization': 'redaced_token
+  }
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+
+```
+
+## B. Discover a Lapsed Customer CLO
+Code Recipe: 
+- `GET` [Eligible Rewards Offers](https://developer.getkard.com/#operation/getEligibleRewardsOffers) Endpoint
+- `referringPartnerUserId` path param: `sandbox-{issuerName}-lapsed-customer`
+```
+var axios = require('axios');
+
+var config = {
+  method: 'get',
+  url: 'https://test-rewards-api.getkard.com/rewards/merchant/offers/user/sandbox-{issuerName}-lapsed-customer',
+  headers: { 
+    'Content-Type': 'application/json', 
+    'Authorization': 'redaced_token
+  }
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+```
+
+## C. Discover a Local CLO
+Code Recipe: 
+- `GET` [Locations](https://developer.getkard.com/#operation/getLocations) Endpoint
+- `source` query param: `LOCAL`
+```
+var axios = require('axios');
+
+var config = {
+  method: 'get',
+  url: 'https://test-rewards-api.getkard.com/rewards/merchant/locations?source=LOCAL',
+  headers: { 
+    'Content-Type': 'application/json', 
+    'Authorization': 'redacted_token'
+  }
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+
+
+```
+
+## D. Trigger an Earned Reward Webhook
+The following steps provide a demo experience from the perspective of the `sandbox-{issuerName}-new-customer` cardholder.  
+Code Recipe: 
+1. [Discover Eligible New Customer Offers]().  
 ```
     {
-        "_id": "629f6fa4b5df7700096f884a",
-        "name": "Hilltop BBQ",
-        "description": "Hilltop Bar B Que offers home-cooked, Alabama-style BBQ in 50 locations across the US...",
+        "_id": "6409fa6d8a2a4300083d4143",
+        "isLocationSpecific": false,
+        "terms": "This offer is only valid for first-time customers.",
+        "redeemableOnce": false,
+        "name": "BaaS Pro Shops - New Customers",
+...
+        "merchant": {
+            "_id": "6409f118705b8a000834f23d",
+            "description": "Trusted source for all products debit, credit, crypto, and more. 
+                             In business since 2011, shop online or swing by our store!",
+...
+            "name": "BaaS Pro Shops",
+            "bannerImgUrl": "https://assets.getkard.com/public/banners/kard.jpg"
+        },
         "source": "NATIONAL",
-        "category": "Food & Beverage",
-        "imgUrl": "https://assets.getkard.com/public/logos/kard.jpg",
-        "bannerImgUrl": "https://assets.getkard.com/public/banners/kard.jpg",
-        "websiteURL": "https://www.kardhilltopbbq.com",
-        "acceptedCards": [
-            "VISA",
-            "MASTERCARD",
-            "AMERICAN EXPRESS"
-        ],
-        "offers": ...
+        "totalCommission": 12
     },
 ```
-3. [Submit Eligible Transaction](#c-transaction-clo-matching).  
+2. [Submit Eligible Transaction](#c-transaction-clo-matching).  
 Code Recipe: 
 - `POST` [Incoming Transactions](https://developer.getkard.com/#operation/incomingTransactionEndpoint) Endpoint
-- Rewards Merchant `name` field maps to Incoming Transaction `description`
+- Map Rewards offer `merchant.name` field to Incoming Transaction `description` field
 ```
 {
    "transactionId": "sandbox-web-303",
-   "referringPartnerUserId": "438103",
+   "referringPartnerUserId": "sandbox-{issuerName}-new-customer",
    "cardBIN": "123456",
    "cardLastFour": "4321",
    "amount": 10000,
    "currency": "USD",
-   "description": "Hilltop BBQ",
+   "description": "BaaS Pro Shops",
    "status": "APPROVED",
-   "authorizationDate": "2022-10-29T17:48:06.135Z"
+   "authorizationDate": "2023-03-29T17:48:06.135Z"
 }
 ```
 4. Ingest Earned Reward Webhook.   
@@ -440,4 +536,36 @@ Code Recipe:
 - `POST` [Issuer Earned Reward Webhook](https://developer.getkard.com/#operation/issuerEarnedRewardWebhook) Endpoint
 - Authenticate webhook using [HMAC Signature Verification](#iv-hmac-signature-verification)
 - Delight your cardholder with a notification!   
-![example-earned-reward-notification](https://assets-global.website-files.com/6182d563d3a1261e724c788d/62603f4cf63fa3366c9ea9ea_ayXuXpbASOzI5PD9AQQqf623qIryIWohMg0yo9fEd6AN2g3G2oyjYUcUTKmgmX5V6ErxCM_7zD2LU7gZ-4b4AyH2hiUyhWj2888LJzfcwx4HkurkK6x0rWg2JiiKbFe_zq-9aTXJ.png)
+![example-earned-reward-notification](https://assets-global.website-files.com/6182d563d3a1261e724c788d/64076acd79c73585ead3e520_2Q4_C0BXnWNz2ldQI6lNBOcEOlIhsPPZLwhNYmLTDy7HiuopuUDLkmbkGoi3Hv80aYOY_fvKsNg5ZJx6BtfblkEQbtyZ9jgC8xpo3OiEJxpHfz4P6BhjMyM3LwRQH78i7vY2jkakjELh5JC4ENm2ezs.png)
+
+
+# User Acceptance Test Cases
+**As a cardholder, I should be able to successfully:**
+ - Enroll in the rewards program.
+ - Unenroll from the rewards program.
+ - Add a card to my profile.
+ - View a list of eligible ONLINE rewards.
+ - View a list of eligible INSTORE rewards.
+ - View a list of eligible rewards near me.
+ - View Offer Details.
+ - Submit a Clearing, Dual Message Transaction.
+    - Submit an APPROVED(aka AUTH) event to the Incoming Transactions Endpoint 
+    - Submit a SETTLED (aka CLEARED) event to the Incoming Transactions Endpoint
+ - Submit a Declined, Dual Message Transaction.
+    - Submit an APPROVED(aka AUTH) event to the Incoming Transactions Endpoint 
+    - Submit a DECLINED event to the Incoming Transactions Endpoint
+ - Submit a Reversed, Dual Message Transaction.
+   - Submit an APPROVED(aka AUTH) event to the Incoming Transactions Endpoint
+   - Submit a REVERSED (aka CLEARED) event to the Incoming Transactions Endpoint
+ - Submit a Single Message, PIN-debit Transaction.
+   - Submit a SETTLED (aka CLEARED) event to the Incoming Transactions Endpoint
+ - Submit a Refund Transaction.
+   - Submit a RETURNED event to the Incoming Transactions Endpoint
+ - Receive an Earned Reward Webhook push notification
+
+**As a rewards program manager, I should be able to successfully:**
+ - Consume recon files.
+   - Daily
+   - Monthly
+ - Create an Audit Request.
+ - Get an Audit Request Status.
