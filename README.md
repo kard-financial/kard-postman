@@ -9,11 +9,11 @@ Welcome to the Kard Postman Collection! Use this collection for a quick and easy
    - [Targeted Offers](https://github.com/kard-financial/kard-postman#b-targeted-offers)
    - [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching)
 - [Recommended User Experiences](#recommended-user-experiences)
-   - [Discover a New Customer CLO]()
-   - [Discover a Lapsed Customer CLO]()
-   - [Discover a Local CLO]()   
-   - [Trigger an Earned Reward Webhook]()
-- [User Acceptance Test Cases]()
+   - [Discover a New Customer CLO](https://github.com/kard-financial/kard-postman#a-discover-a-new-customer-clo)
+   - [Discover a Lapsed Customer CLO](https://github.com/kard-financial/kard-postman#b-discover-a-lapsed-customer-clo)
+   - [Discover a Local CLO](https://github.com/kard-financial/kard-postman#c-discover-a-local-clo)   
+   - [Trigger an Earned Reward Webhook](https://github.com/kard-financial/kard-postman#d-trigger-an-earned-reward-webhook)
+- [User Acceptance Test Cases](https://github.com/kard-financial/kard-postman#user-acceptance-test-cases)
 # How it Works
 
 ### I. Set up the Collection
