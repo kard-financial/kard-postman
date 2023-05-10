@@ -466,13 +466,16 @@ axios(config)
 ## C. Discover CLOs Near You (Map View)
 Code Recipe: 
 - `GET` [Locations](https://developer.getkard.com/#operation/getLocations) Endpoint
-- `source` query param: `LOCAL`
+- query params:
+    - `source=LOCAL`
+    - `longitude=-73.9930148`
+    - `latitutde=40.74201480000001`
 ```
 var axios = require('axios');
 
 var config = {
   method: 'get',
-  url: 'https://test-rewards-api.getkard.com/rewards/merchant/locations?source=LOCAL',
+  url: 'https://test-rewards-api.getkard.com/rewards/merchant/locations?longitude=-73.9930148&latitude=40.74201480000001&source=LOCAL',
   headers: { 
     'Content-Type': 'application/json', 
     'Authorization': 'redacted_token'
