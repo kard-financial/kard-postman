@@ -107,7 +107,7 @@ Creating a User with cardInfo object:
   }
 }
 ```
-*Note*: If a cardholder tries to enroll a card of a direct partner the following error message will be returned
+*Note*: If a cardholder tries to enroll a card of a direct partner the following error message will be returned from the API:
 ```
 "Invalid request: This card is already registered. Provide another card for user enrollment."
 ```
