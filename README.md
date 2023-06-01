@@ -107,6 +107,10 @@ Creating a User with cardInfo object:
   }
 }
 ```
+*Note*: If a cardholder tries to enroll a card of a direct partner the following error message will be returned
+```
+"Invalid request: This card is already registered. Provide another card for user enrollment."
+```
 
 ### II. Issuers
 Your application supports only cards issued by your program manager. As a result, transactions will originate from known cardBINs and networks so a user can be created with or without card-level information. If creating without the cardInfo object, the user can later be updated.
