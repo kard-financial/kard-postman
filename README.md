@@ -92,13 +92,14 @@ Your application allows cardholders to link cards from other programs. As a resu
 Code Recipe:
 
 Creating a User with cardInfo object:
-- *required:* userName OR email, referringPartnerUserId, cardInfo
+- *required:* userName OR email, referringPartnerUserId, zipCode, cardInfo
 - cardInfo["issuer"]: Program Name as known to Kard, rather than the underlying Card Issuer
 ```
 {
   "email": "testuser@test-TEST.com",
   "userName": "testUser",
   "referringPartnerUserId": "438103",
+  "zipCode": "30047",
   "cardInfo": {
     "last4": "4321",
     "bin": "123456",
@@ -118,12 +119,13 @@ Your application supports only cards issued by your program manager. As a result
 Code Recipe:
 
 Creating a User:
-- *required:* userName OR email, referringPartnerUserId
+- *required:* userName OR email, referringPartnerUserId, zipCode
 ```
 {
   "email": "testuser@test-TEST.com",
   "userName": "testUser",
-  "referringPartnerUserId": "438103"
+  "referringPartnerUserId": "438103",
+  "zipCode": "30047",
 }
 ```
 
