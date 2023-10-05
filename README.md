@@ -172,13 +172,13 @@ The following are descriptions and code recipes for each pattern.
 
 ### I. Dual Message
 
-The most common pattern used to transmit transactions is the Dual Message system, also known as a Signature Debit transaction. Using this system, a transaction is submitted in 2 events. The first, originating event is a temporary transaction state followed by a second event that is a final, clearing transaction state.
+The most common pattern used to transmit transactions is the Dual Message system, also known as a Signature transactions. Using this system, a transaction is submitted in 2 events. The first, originating event is a temporary transaction state followed by a second event that is a final, clearing transaction state.
 
 1. Temporary Transaction Event: APPROVED
 2. Final Transaction Event: SETTLED, REVERSED, DECLINED, RETURNED*  
 *special case where the originating, temporary transaction ID is not readily identifiable
 
-#### Code Recipe: Cleared, Signature Debit Transaction
+#### Code Recipe: Cleared, Signature Transaction
 
 Temporary transaction event:
 - status: APPROVED
@@ -199,6 +199,7 @@ Temporary transaction event:
 
 Final transaction event:
 - status: SETTLED
+- authorizationDate timestamp
 - settledDate timestamp
 - identical transactionId as the originating APPROVED event
 ```
@@ -211,12 +212,13 @@ Final transaction event:
    "currency": "USD",
    "description": "Hilltop BBQ",
    "status": "SETTLED",
+   "authorizationDate": "2022-10-29T17:48:06.135Z",
    "settledDate": "2022-10-30T17:48:06.135Z"
 }
 ```
 
 
-Code Recipe: Reversed, Signature Debit Transaction    
+Code Recipe: Reversed, Signature Transaction    
 *Sending Reversal infomration enables the platform's Transaction Monitoring, where Kard conducts internal fraud detection to identify suspicious behavior through abnormal transaction amounts and high volume transactions or returns per cardholder on a daily basis. We then notify Issuers of any potential fraud to be investigated if it is found.*
 
 Temporary transaction event:
@@ -307,6 +309,7 @@ Temporary transaction event: (1 of 1)
 ```
 Final transaction event: (1 of 2)
 - status: SETTLED
+- authorization timestamp ("2022-10-3***0***T17:48:06.135Z")
 - settledDate timestamp ("2022-10-3***0***T18:48:06.135Z")
 - $75 transaction amount
 ```
@@ -319,11 +322,13 @@ Final transaction event: (1 of 2)
    "currency": "USD",
    "description": "Hilltop BBQ",
    "status": "SETTLED",
+   "authorizationDate": "2022-10-30T17:48:06.135Z",
    "settledDate": "2022-10-30T18:48:06.135Z"
 }
 ```
 Final transaction event: (2 of 2)
 - status: SETTLED
+- authorizationDate timestamp ("2022-10-3***0***T17:48:06.135Z")
 - settledDate timestamp ("2022-10-3***1***T18:48:06.135Z")
 - $25 transaction amount
 ```
@@ -336,6 +341,7 @@ Final transaction event: (2 of 2)
    "currency": "USD",
    "description": "Hilltop BBQ",
    "status": "SETTLED",
+   "authorizationDate": "2022-10-30T17:48:06.135Z",
    "settledDate": "2022-10-31T18:48:06.135Z"
 }
 ```
