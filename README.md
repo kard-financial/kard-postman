@@ -192,6 +192,7 @@ Temporary transaction event:
    "amount": 10000,
    "currency": "USD",
    "description": "Hilltop BBQ",
+   "merchantId": "542814140150267",
    "status": "APPROVED",
    "authorizationDate": "2022-10-29T17:48:06.135Z"
 }
