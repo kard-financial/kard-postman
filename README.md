@@ -193,6 +193,10 @@ Temporary transaction event:
    "currency": "USD",
    "description": "Hilltop BBQ",
    "merchantId": "542814140150267",
+   "merchantName": "Hilltop BBQ",
+   "merchantAddrCity": "Atlanta",
+   "merchantAddrState": "GA",
+   "merchantAddrStreet": "123 Peachtree St",
    "status": "APPROVED",
    "authorizationDate": "2022-10-29T17:48:06.135Z"
 }
