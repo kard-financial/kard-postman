@@ -216,9 +216,13 @@ Final transaction event:
    "amount": 10000,
    "currency": "USD",
    "description": "Hilltop BBQ",
-   "status": "SETTLED",
-   "authorizationDate": "2022-10-29T17:48:06.135Z",
-   "settledDate": "2022-10-30T17:48:06.135Z"
+   "merchantId": "542814140150267",
+   "merchantName": "Hilltop BBQ",
+   "merchantAddrCity": "Atlanta",
+   "merchantAddrState": "GA",
+   "merchantAddrStreet": "123 Peachtree St",
+   "status": "APPROVED",
+   "authorizationDate": "2022-10-29T17:48:06.135Z"
 }
 ```
 
@@ -238,6 +242,11 @@ Temporary transaction event:
    "amount": 10000,
    "currency": "USD",
    "description": "Hilltop BBQ",
+   "merchantId": "542814140150267",
+   "merchantName": "Hilltop BBQ",
+   "merchantAddrCity": "Atlanta",
+   "merchantAddrState": "GA",
+   "merchantAddrStreet": "123 Peachtree St",
    "status": "APPROVED",
    "authorizationDate": "2022-10-29T17:48:06.135Z"
 }
@@ -256,8 +265,13 @@ Final transaction event:
    "amount": 10000,
    "currency": "USD",
    "description": "Hilltop BBQ",
-   "status": "REVERSED",
-   "transactionDate": "2022-10-30T17:48:06.135Z"
+   "merchantId": "542814140150267",
+   "merchantName": "Hilltop BBQ",
+   "merchantAddrCity": "Atlanta",
+   "merchantAddrState": "GA",
+   "merchantAddrStreet": "123 Peachtree St",
+   "status": "APPROVED",
+   "authorizationDate": "2022-10-29T17:48:06.135Z"
 }
 ```
 
@@ -271,16 +285,20 @@ Another common pattern used to transmit transactions is the Single Message syste
 - settledDate timestamp
 ```
 {
-   "transactionId": "sandbox-web-313",
+   "transactionId": "sandbox-web-303",
    "referringPartnerUserId": "438103",
    "cardBIN": "123456",
    "cardLastFour": "4321",
    "amount": 10000,
    "currency": "USD",
    "description": "Hilltop BBQ",
-   "status": "SETTLED",
-   "authorizationDate": "2022-10-30T17:48:06.135Z",   
-   "settledDate": "2022-10-30T17:48:06.135Z"
+   "merchantId": "542814140150267",
+   "merchantName": "Hilltop BBQ",
+   "merchantAddrCity": "Atlanta",
+   "merchantAddrState": "GA",
+   "merchantAddrStreet": "123 Peachtree St",
+   "status": "APPROVED",
+   "authorizationDate": "2022-10-29T17:48:06.135Z"
 }
 ```
 
@@ -301,15 +319,20 @@ Temporary transaction event: (1 of 1)
 - $100 transaction amount
 ```
 {
-   "transactionId": "sandbox-web-323",
+   "transactionId": "sandbox-web-303",
    "referringPartnerUserId": "438103",
    "cardBIN": "123456",
    "cardLastFour": "4321",
    "amount": 10000,
    "currency": "USD",
    "description": "Hilltop BBQ",
+   "merchantId": "542814140150267",
+   "merchantName": "Hilltop BBQ",
+   "merchantAddrCity": "Atlanta",
+   "merchantAddrState": "GA",
+   "merchantAddrStreet": "123 Peachtree St",
    "status": "APPROVED",
-   "authorizationDate": "2022-10-30T17:48:06.135Z"
+   "authorizationDate": "2022-10-29T17:48:06.135Z"
 }
 ```
 Final transaction event: (1 of 2)
@@ -319,16 +342,20 @@ Final transaction event: (1 of 2)
 - $75 transaction amount
 ```
 {
-   "transactionId": "sandbox-web-323",
+   "transactionId": "sandbox-web-303",
    "referringPartnerUserId": "438103",
    "cardBIN": "123456",
    "cardLastFour": "4321",
-   "amount": 7500,
+   "amount": 10000,
    "currency": "USD",
    "description": "Hilltop BBQ",
-   "status": "SETTLED",
-   "authorizationDate": "2022-10-30T17:48:06.135Z",
-   "settledDate": "2022-10-30T18:48:06.135Z"
+   "merchantId": "542814140150267",
+   "merchantName": "Hilltop BBQ",
+   "merchantAddrCity": "Atlanta",
+   "merchantAddrState": "GA",
+   "merchantAddrStreet": "123 Peachtree St",
+   "status": "APPROVED",
+   "authorizationDate": "2022-10-29T17:48:06.135Z"
 }
 ```
 Final transaction event: (2 of 2)
@@ -338,16 +365,20 @@ Final transaction event: (2 of 2)
 - $25 transaction amount
 ```
 {
-   "transactionId": "sandbox-web-323",
+   "transactionId": "sandbox-web-303",
    "referringPartnerUserId": "438103",
    "cardBIN": "123456",
    "cardLastFour": "4321",
-   "amount": 2500,
+   "amount": 10000,
    "currency": "USD",
    "description": "Hilltop BBQ",
-   "status": "SETTLED",
-   "authorizationDate": "2022-10-30T17:48:06.135Z",
-   "settledDate": "2022-10-31T18:48:06.135Z"
+   "merchantId": "542814140150267",
+   "merchantName": "Hilltop BBQ",
+   "merchantAddrCity": "Atlanta",
+   "merchantAddrState": "GA",
+   "merchantAddrStreet": "123 Peachtree St",
+   "status": "APPROVED",
+   "authorizationDate": "2022-10-29T17:48:06.135Z"
 }
 ```
 ### [IV. HMAC Signature Verification](https://developer.getkard.com/#operation/issuerEarnedRewardWebhook)
