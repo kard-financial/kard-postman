@@ -166,7 +166,7 @@ The three primary patterns used to send transactions to Kard for matching proces
 2. [Single Message](#ii-single-message)
 3. [One Authorization to Many Settlements](#iii-one-authorization-to-many-settlements)
 
-To properly ingest a matched transaction earned reward webhook, check out the section on [HMAC Signature Verification](#iv-hmac-signature-verification).
+To properly ingest a matched transaction earned reward webhook we require certain fields to be provided (Listed in the payload examples below). Check out the section on [HMAC Signature Verification](#iv-hmac-signature-verification).
  
 The following are descriptions and code recipes for each pattern.
 
