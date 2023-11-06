@@ -223,6 +223,7 @@ Final transaction event:
    "merchantAddrStreet": "123 Peachtree St",
    "status": "APPROVED",
    "authorizationDate": "2022-10-29T17:48:06.135Z"
+   "settledDate": "2022-10-30T17:48:06.135Z"
 }
 ```
 
@@ -270,8 +271,9 @@ Final transaction event:
    "merchantAddrCity": "Atlanta",
    "merchantAddrState": "GA",
    "merchantAddrStreet": "123 Peachtree St",
-   "status": "APPROVED",
+   "status": "REVERSED",
    "authorizationDate": "2022-10-29T17:48:06.135Z"
+   "transactionDate": "2022-10-30T17:48:06.135Z"
 }
 ```
 
@@ -299,6 +301,7 @@ Another common pattern used to transmit transactions is the Single Message syste
    "merchantAddrStreet": "123 Peachtree St",
    "status": "APPROVED",
    "authorizationDate": "2022-10-29T17:48:06.135Z"
+   "settledDate": "2022-10-30T17:48:06.135Z"
 }
 ```
 
@@ -331,8 +334,9 @@ Temporary transaction event: (1 of 1)
    "merchantAddrCity": "Atlanta",
    "merchantAddrState": "GA",
    "merchantAddrStreet": "123 Peachtree St",
-   "status": "APPROVED",
+   "status": "SETTLED",
    "authorizationDate": "2022-10-29T17:48:06.135Z"
+   "settledDate": "2022-10-30T18:48:06.135Z"
 }
 ```
 Final transaction event: (1 of 2)
@@ -354,8 +358,9 @@ Final transaction event: (1 of 2)
    "merchantAddrCity": "Atlanta",
    "merchantAddrState": "GA",
    "merchantAddrStreet": "123 Peachtree St",
-   "status": "APPROVED",
+   "status": "SETTLED",
    "authorizationDate": "2022-10-29T17:48:06.135Z"
+   "settledDate": "2022-10-30T18:48:06.135Z"
 }
 ```
 Final transaction event: (2 of 2)
@@ -377,8 +382,9 @@ Final transaction event: (2 of 2)
    "merchantAddrCity": "Atlanta",
    "merchantAddrState": "GA",
    "merchantAddrStreet": "123 Peachtree St",
-   "status": "APPROVED",
+   "status": "SETTLED",
    "authorizationDate": "2022-10-29T17:48:06.135Z"
+   "settledDate": "2022-10-31T18:48:06.135Z"
 }
 ```
 ### [IV. HMAC Signature Verification](https://developer.getkard.com/#operation/issuerEarnedRewardWebhook)
