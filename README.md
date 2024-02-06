@@ -7,7 +7,8 @@ Welcome to the Kard Postman Collection! Use this collection for a quick and easy
 - [Recommended Integration Patterns](#recommended-integration-patterns)
    - [Cardholders](https://github.com/kard-financial/kard-postman#a-cardholders)
    - [Targeted Offers](https://github.com/kard-financial/kard-postman#b-targeted-offers)
-   - [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching)
+   - [Historical Transaction Data](https://github.com/kard-financial/kard-postman#c-historical-transaction-data-import)
+   - [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#d-transaction-clo-matching)
 - [Recommended User Experiences](#recommended-user-experiences)
    - [Discover a New Customer CLO](https://github.com/kard-financial/kard-postman#a-discover-a-new-customer-clo)
    - [Discover a Lapsed Customer CLO](https://github.com/kard-financial/kard-postman#b-discover-a-lapsed-customer-clo)
@@ -159,7 +160,11 @@ Each sandbox environment is configured with the following cardholder personas:
 
 These personas demonstrate targeting functionality in terms of offer discovery (the cardholder is viewing a personalized offer) and transaction matching (the cardholder transaction matches to the personalized offer). The `{issuerName}` variable is provided in the sandbox environment.json. 
 
-## [C. Transaction CLO Matching](https://developer.getkard.com/#operation/incomingTransactionEndpoint)
+## [C. Historical Transaction Data Import](https://docs.google.com/spreadsheets/d/18APeydg5Ebne_nVlxHchCG5wuNpii9O_EY5TikXCVLY/edit#gid=0)
+
+TBD
+
+## [D. Transaction CLO Matching](https://developer.getkard.com/#operation/incomingTransactionEndpoint)
 
 The three primary patterns used to send transactions to Kard for matching processing are:
 1. [Dual Message](#i-dual-message)
