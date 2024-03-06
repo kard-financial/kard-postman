@@ -166,6 +166,8 @@ The three primary patterns used to send transactions to Kard for matching proces
 2. [Single Message](#ii-single-message)
 3. [One Authorization to Many Settlements](#iii-one-authorization-to-many-settlements)
 
+In order to accurately match incoming transactions, specific fields must be provided which can be found here:https://developer.getkard.com/#operation/incomingTransactionEndpoint. 
+
 To properly ingest a matched transaction earned reward webhook, check out the section on [HMAC Signature Verification](#iv-hmac-signature-verification).
  
 The following are descriptions and code recipes for each pattern.
@@ -185,13 +187,18 @@ Temporary transaction event:
 - authorizationDate timestamp
 ```
 {
-   "transactionId": "sandbox-web-303",
+   "transactionId": "sandbox-web-313",
    "referringPartnerUserId": "438103",
    "cardBIN": "123456",
    "cardLastFour": "4321",
    "amount": 10000,
    "currency": "USD",
    "description": "Hilltop BBQ",
+   "merchantId": "542814140150267",
+   "merchantName": "Hilltop BBQ",
+   "merchantAddrCity": "Atlanta",
+   "merchantAddrState": "GA",
+   "merchantAddrStreet": "123 Peachtree St",
    "status": "APPROVED",
    "authorizationDate": "2022-10-29T17:48:06.135Z"
 }
@@ -204,15 +211,20 @@ Final transaction event:
 - identical transactionId as the originating APPROVED event
 ```
 {
-   "transactionId": "sandbox-web-303",
+   "transactionId": "sandbox-web-313",
    "referringPartnerUserId": "438103",
    "cardBIN": "123456",
    "cardLastFour": "4321",
    "amount": 10000,
    "currency": "USD",
    "description": "Hilltop BBQ",
+   "merchantId": "542814140150267",
+   "merchantName": "Hilltop BBQ",
+   "merchantAddrCity": "Atlanta",
+   "merchantAddrState": "GA",
+   "merchantAddrStreet": "123 Peachtree St",
    "status": "SETTLED",
-   "authorizationDate": "2022-10-29T17:48:06.135Z",
+   "authorizationDate": "2022-10-29T17:48:06.135Z"
    "settledDate": "2022-10-30T17:48:06.135Z"
 }
 ```
@@ -226,13 +238,18 @@ Temporary transaction event:
 - authorizationDate timestamp
 ```
 {
-   "transactionId": "sandbox-web-303",
+   "transactionId": "sandbox-web-313",
    "referringPartnerUserId": "438103",
    "cardBIN": "123456",
    "cardLastFour": "4321",
    "amount": 10000,
    "currency": "USD",
    "description": "Hilltop BBQ",
+   "merchantId": "542814140150267",
+   "merchantName": "Hilltop BBQ",
+   "merchantAddrCity": "Atlanta",
+   "merchantAddrState": "GA",
+   "merchantAddrStreet": "123 Peachtree St",
    "status": "APPROVED",
    "authorizationDate": "2022-10-29T17:48:06.135Z"
 }
@@ -244,13 +261,18 @@ Final transaction event:
 - identical transactionId as the originating APPROVED event
 ```
 {
-   "transactionId": "sandbox-web-303",
+   "transactionId": "sandbox-web-313",
    "referringPartnerUserId": "438103",
    "cardBIN": "123456",
    "cardLastFour": "4321",
    "amount": 10000,
    "currency": "USD",
    "description": "Hilltop BBQ",
+   "merchantId": "542814140150267",
+   "merchantName": "Hilltop BBQ",
+   "merchantAddrCity": "Atlanta",
+   "merchantAddrState": "GA",
+   "merchantAddrStreet": "123 Peachtree St",
    "status": "REVERSED",
    "transactionDate": "2022-10-30T17:48:06.135Z"
 }
@@ -273,8 +295,13 @@ Another common pattern used to transmit transactions is the Single Message syste
    "amount": 10000,
    "currency": "USD",
    "description": "Hilltop BBQ",
+   "merchantId": "542814140150267",
+   "merchantName": "Hilltop BBQ",
+   "merchantAddrCity": "Atlanta",
+   "merchantAddrState": "GA",
+   "merchantAddrStreet": "123 Peachtree St",
    "status": "SETTLED",
-   "authorizationDate": "2022-10-30T17:48:06.135Z",   
+   "authorizationDate": "2022-10-29T17:48:06.135Z"
    "settledDate": "2022-10-30T17:48:06.135Z"
 }
 ```
@@ -303,8 +330,13 @@ Temporary transaction event: (1 of 1)
    "amount": 10000,
    "currency": "USD",
    "description": "Hilltop BBQ",
+   "merchantId": "542814140150267",
+   "merchantName": "Hilltop BBQ",
+   "merchantAddrCity": "Atlanta",
+   "merchantAddrState": "GA",
+   "merchantAddrStreet": "123 Peachtree St",
    "status": "APPROVED",
-   "authorizationDate": "2022-10-30T17:48:06.135Z"
+   "authorizationDate": "2022-10-29T17:48:06.135Z"
 }
 ```
 Final transaction event: (1 of 2)
@@ -321,8 +353,13 @@ Final transaction event: (1 of 2)
    "amount": 7500,
    "currency": "USD",
    "description": "Hilltop BBQ",
+   "merchantId": "542814140150267",
+   "merchantName": "Hilltop BBQ",
+   "merchantAddrCity": "Atlanta",
+   "merchantAddrState": "GA",
+   "merchantAddrStreet": "123 Peachtree St",
    "status": "SETTLED",
-   "authorizationDate": "2022-10-30T17:48:06.135Z",
+   "authorizationDate": "2022-10-30T17:48:06.135Z"
    "settledDate": "2022-10-30T18:48:06.135Z"
 }
 ```
@@ -340,8 +377,13 @@ Final transaction event: (2 of 2)
    "amount": 2500,
    "currency": "USD",
    "description": "Hilltop BBQ",
+   "merchantId": "542814140150267",
+   "merchantName": "Hilltop BBQ",
+   "merchantAddrCity": "Atlanta",
+   "merchantAddrState": "GA",
+   "merchantAddrStreet": "123 Peachtree St",
    "status": "SETTLED",
-   "authorizationDate": "2022-10-30T17:48:06.135Z",
+   "authorizationDate": "2022-10-30T17:48:06.135Z"
    "settledDate": "2022-10-31T18:48:06.135Z"
 }
 ```
@@ -534,7 +576,7 @@ Code Recipe:
 - Map Rewards offer `merchant.name` to Incoming Transaction `description`
 ```
 {
-   "transactionId": "sandbox-web-303",
+   "transactionId": "sandbox-web-313",
    "referringPartnerUserId": "sandbox-{issuerName}-new-customer",
    "cardBIN": "123456",
    "cardLastFour": "4321",
