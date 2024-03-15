@@ -193,7 +193,6 @@ Temporary transaction event:
    "cardBIN": "123456",
    "cardLastFour": "4321",
    "mcc": "1234",
-   "merchantId": "123456789101213",
    "amount": 10000,
    "currency": "USD",
    "description": "Hilltop BBQ",
@@ -219,7 +218,6 @@ Final transaction event:
    "cardBIN": "123456",
    "cardLastFour": "4321",
    "mcc": "1234",
-   "merchantId": "123456789101213",
    "amount": 10000,
    "currency": "USD",
    "description": "Hilltop BBQ",
@@ -229,7 +227,7 @@ Final transaction event:
    "merchantAddrState": "GA",
    "merchantAddrStreet": "123 Peachtree St",
    "status": "SETTLED",
-   "authorizationDate": "2022-10-29T17:48:06.135Z"
+   "authorizationDate": "2022-10-29T17:48:06.135Z",
    "settledDate": "2022-10-30T17:48:06.135Z"
 }
 ```
@@ -249,7 +247,6 @@ Temporary transaction event:
    "cardLastFour": "4321",
    "amount": 10000,
    "mcc": "1234",
-   "merchantId": "123456789101213",
    "currency": "USD",
    "description": "Hilltop BBQ",
    "merchantId": "542814140150267",
@@ -274,7 +271,6 @@ Final transaction event:
    "cardLastFour": "4321",
    "amount": 10000,
    "mcc": "1234",
-   "merchantId": "123456789101213",
    "currency": "USD",
    "description": "Hilltop BBQ",
    "merchantId": "542814140150267",
@@ -303,7 +299,6 @@ Another common pattern used to transmit transactions is the Single Message syste
    "cardLastFour": "4321",
    "amount": 10000,
    "mcc": "1234",
-   "merchantId": "123456789101213",
    "currency": "USD",
    "description": "Hilltop BBQ",
    "merchantId": "542814140150267",
@@ -312,7 +307,7 @@ Another common pattern used to transmit transactions is the Single Message syste
    "merchantAddrState": "GA",
    "merchantAddrStreet": "123 Peachtree St",
    "status": "SETTLED",
-   "authorizationDate": "2022-10-29T17:48:06.135Z"
+   "authorizationDate": "2022-10-29T17:48:06.135Z",
    "settledDate": "2022-10-30T17:48:06.135Z"
 }
 ```
@@ -340,7 +335,6 @@ Temporary transaction event: (1 of 1)
    "cardLastFour": "4321",
    "amount": 10000,
    "mcc": "1234",
-   "merchantId": "123456789101213",
    "currency": "USD",
    "description": "Hilltop BBQ",
    "merchantId": "542814140150267",
@@ -365,7 +359,6 @@ Final transaction event: (1 of 2)
    "cardLastFour": "4321",
    "amount": 7500,
    "mcc": "1234",
-   "merchantId": "123456789101213",
    "currency": "USD",
    "description": "Hilltop BBQ",
    "merchantId": "542814140150267",
@@ -374,7 +367,7 @@ Final transaction event: (1 of 2)
    "merchantAddrState": "GA",
    "merchantAddrStreet": "123 Peachtree St",
    "status": "SETTLED",
-   "authorizationDate": "2022-10-30T17:48:06.135Z"
+   "authorizationDate": "2022-10-30T17:48:06.135Z",
    "settledDate": "2022-10-30T18:48:06.135Z"
 }
 ```
@@ -391,7 +384,6 @@ Final transaction event: (2 of 2)
    "cardLastFour": "4321",
    "amount": 2500,
    "mcc": "1234",
-   "merchantId": "123456789101213",
    "currency": "USD",
    "description": "Hilltop BBQ",
    "merchantId": "542814140150267",
@@ -400,7 +392,7 @@ Final transaction event: (2 of 2)
    "merchantAddrState": "GA",
    "merchantAddrStreet": "123 Peachtree St",
    "status": "SETTLED",
-   "authorizationDate": "2022-10-30T17:48:06.135Z"
+   "authorizationDate": "2022-10-30T17:48:06.135Z",
    "settledDate": "2022-10-31T18:48:06.135Z"
 }
 ```
