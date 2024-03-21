@@ -197,7 +197,6 @@ Temporary transaction event:
    "amount": 10000,
    "currency": "USD",
    "description": "Hilltop BBQ",
-   "merchantId": "542814140150267",
    "merchantName": "Hilltop BBQ",
    "merchantAddrCity": "Atlanta",
    "merchantAddrState": "GA",
