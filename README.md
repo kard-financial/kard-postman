@@ -131,6 +131,7 @@ Creating a User:
 
 Add cardInfo to User:
 - cardInfo["issuer"]: Program Name as known to Kard, rather than the underlying Card Issuer
+- *required:* referringPartnerUserId, cardInfo
 ```
 {
   "referringPartnerUserId": "438103",
@@ -191,6 +192,8 @@ Temporary transaction event:
    "referringPartnerUserId": "438103",
    "cardBIN": "123456",
    "cardLastFour": "4321",
+   "mcc": "1234",
+   "merchantId": "123456789101213",
    "amount": 10000,
    "currency": "USD",
    "description": "Hilltop BBQ",
@@ -215,6 +218,8 @@ Final transaction event:
    "referringPartnerUserId": "438103",
    "cardBIN": "123456",
    "cardLastFour": "4321",
+   "mcc": "1234",
+   "merchantId": "123456789101213",
    "amount": 10000,
    "currency": "USD",
    "description": "Hilltop BBQ",
@@ -243,6 +248,8 @@ Temporary transaction event:
    "cardBIN": "123456",
    "cardLastFour": "4321",
    "amount": 10000,
+   "mcc": "1234",
+   "merchantId": "123456789101213",
    "currency": "USD",
    "description": "Hilltop BBQ",
    "merchantId": "542814140150267",
@@ -266,6 +273,8 @@ Final transaction event:
    "cardBIN": "123456",
    "cardLastFour": "4321",
    "amount": 10000,
+   "mcc": "1234",
+   "merchantId": "123456789101213",
    "currency": "USD",
    "description": "Hilltop BBQ",
    "merchantId": "542814140150267",
@@ -293,6 +302,8 @@ Another common pattern used to transmit transactions is the Single Message syste
    "cardBIN": "123456",
    "cardLastFour": "4321",
    "amount": 10000,
+   "mcc": "1234",
+   "merchantId": "123456789101213",
    "currency": "USD",
    "description": "Hilltop BBQ",
    "merchantId": "542814140150267",
@@ -328,6 +339,8 @@ Temporary transaction event: (1 of 1)
    "cardBIN": "123456",
    "cardLastFour": "4321",
    "amount": 10000,
+   "mcc": "1234",
+   "merchantId": "123456789101213",
    "currency": "USD",
    "description": "Hilltop BBQ",
    "merchantId": "542814140150267",
@@ -351,6 +364,8 @@ Final transaction event: (1 of 2)
    "cardBIN": "123456",
    "cardLastFour": "4321",
    "amount": 7500,
+   "mcc": "1234",
+   "merchantId": "123456789101213",
    "currency": "USD",
    "description": "Hilltop BBQ",
    "merchantId": "542814140150267",
@@ -375,6 +390,8 @@ Final transaction event: (2 of 2)
    "cardBIN": "123456",
    "cardLastFour": "4321",
    "amount": 2500,
+   "mcc": "1234",
+   "merchantId": "123456789101213",
    "currency": "USD",
    "description": "Hilltop BBQ",
    "merchantId": "542814140150267",
@@ -464,6 +481,104 @@ app.listen(port, () => {
  console.log(`Example app listening on port ${port}`);
 });
 ```
+
+[# Marqeta + Kard Integration](https://www.getkard.com/docs/marqeta-kard-integration)
+## Transactions
+Transaction Status Mapping
+
+Kard currently receives the following transaction event types from Marqeta: 
+
+| Marqeta | Kard |
+| ------------- | ------------- |
+| authorization | Approved |
+| authorization.clearing | Settled |
+| pindebit | Settled |
+
+Note: The data mapping for the transaction events below also apply to Kard’s Earned Rewards Webhook.
+
+| Marqeta Field  | Kard Field |
+| ------------- | ------------- |
+| token  | transactionId  |
+| user_token  | referringPartnerUserId |
+| user_transaction_time | transactionDate, authorizationDate
+Note: Depending on status of transaction |
+| settlement_date | settledDate |
+| amount | amount |
+| state | status |
+| preceding_related_transaction_token | transactionId
+Note: valid for transactions after the first transaction event |
+| card_acceptor.mcc | mcc |
+| card_acceptor.name | merchantName |
+| card_acceptor.street_address | merchantAddrStreet |
+| card_acceptor.city | merchantAddrCity |
+| card_acceptor.state | merchantAddrState |
+| card_acceptor.zip | merchantAddrZipcode |
+| card.last_four | cardLastFour |
+| card.pan | cardBIN
+Note: Kard receives a masked PAN, only showing BIN and Last 4 |
+| currency_code | currency |
+| card_acceptor.mid | merchantId |
+| card_acceptor.name | description |
+| network_reference_id | transactionId
+Note: This is relevant for specific integrations. Consult your Kard Account Manager with questions |
+
+## FIPS
+FIPS State Abbreviation mappings
+FIPS codes are numbers which uniquely identify geographic areas
+
+| FIPS State Code  | State |
+| ------------- | ------------- |
+| 01 | ALABAMA |
+| 02 | ALASKA |
+| 04 | ARIZONA |
+| 05 | ARKANSAS |
+| 06 | CALIFORNIA |
+| 08 | COLORADO |
+| 09 | CONNECTICUT |
+| 10 | DELAWARE |
+| 11 | DISTRICT OF COLUMBIA |
+| 12 | FLORIDA |
+| 13 | GEORGIA |
+| 15 | HAWAII | 
+| 16 | IDAHO |
+| 17 | ILLINOIS |
+| 18 | INDIANA |
+| 19 | IOWA |
+| 20 | KANSAS |
+| 21 | KENTUCKY |
+| 22 | LOUISIANA |
+| 23 | MAINE |
+| 24 | MARYLAND |
+| 25 | MASSACHUSETTS |
+| 26 | MICHIGAN |
+| 27 | MINNESOTA |
+| 28 | MISSISSIPPI |
+| 29 | MISSOURI |
+| 30 | MONTANA |
+| 31 | NEBRASKA |
+| 32 | NEVADA |
+| 33 | NEW HAMPSHIRE |
+| 34 | NEW JERSEY |
+| 35 | NEW MEXICO |
+| 36 | NEW YORK |
+| 37 | NORTH CAROLINA |
+| 38 | NORTH DAKOTA |
+| 39 | OHIO |
+| 40 | OKLAHOMA |
+| 41 | OREGON |
+| 42 | PENNSYLVANIA |
+| 44 | RHODE ISLAND |
+| 45 | SOUTH CAROLINA |
+| 46 | SOUTH DAKOTA |
+| 47 | TENNESSEE |
+| 48 | TEXAS |
+| 49 | UTAH |
+| 50 | VERMONT |
+| 51 | VIRGINIA |
+| 53 | WASHINGTON |
+| 54 | WEST VIRGINIA |
+| 55 | WISCONSIN |
+| 56 | WYOMING |
 
 # Recommended User Experiences
 ## A. Discover a New Customer CLO
@@ -581,6 +696,8 @@ Code Recipe:
    "cardBIN": "123456",
    "cardLastFour": "4321",
    "amount": 10000,
+   "mcc": "1234",
+   "merchantId": "123456789101213",
    "currency": "USD",
    "description": "BaaS Pro Shops",
    "status": "APPROVED",
@@ -590,7 +707,8 @@ Code Recipe:
 3. Ingest Earned Reward Webhook.   
 - `POST` [Issuer Earned Reward Webhook](https://developer.getkard.com/#operation/issuerEarnedRewardWebhook) Endpoint
 - Authenticate webhook using [HMAC Signature Verification](#iv-hmac-signature-verification)
-- Delight your cardholder with a notification!   
+- Delight your cardholder with a notification!
+- Note: Cashback/Reward does not have to be given to cardholder when notification is triggered   
 ![example-earned-reward-notification](https://assets-global.website-files.com/6182d563d3a1261e724c788d/64076acd79c73585ead3e520_2Q4_C0BXnWNz2ldQI6lNBOcEOlIhsPPZLwhNYmLTDy7HiuopuUDLkmbkGoi3Hv80aYOY_fvKsNg5ZJx6BtfblkEQbtyZ9jgC8xpo3OiEJxpHfz4P6BhjMyM3LwRQH78i7vY2jkakjELh5JC4ENm2ezs.png)
 
 
