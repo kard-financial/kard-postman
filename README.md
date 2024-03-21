@@ -480,11 +480,14 @@ Transaction Status Mapping
 
 Kard currently receives the following transaction event types from Marqeta: 
 
-| Marqeta | Kard |
+| Marqeta Webhook | Kard Status |
 | ------------- | ------------- |
-| authorization | Approved |
-| authorization.clearing | Settled |
-| pindebit | Settled |
+| type = AUTHORIZATION
+state = PENDING | APPROVED |
+| type = CLEARING
+state = COMPLETION | SETTLED |
+| type = PINDEBIT | SETTLED |
+state = COMPLETION
 
 Note: The data mapping for the transaction events below also apply to Kard’s Earned Rewards Webhook.
 
