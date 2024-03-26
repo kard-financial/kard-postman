@@ -8,12 +8,14 @@ Welcome to the Kard Postman Collection! Use this collection for a quick and easy
    - [Cardholders](https://github.com/kard-financial/kard-postman#a-cardholders)
    - [Targeted Offers](https://github.com/kard-financial/kard-postman#b-targeted-offers)
    - [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching)
+   - [Marqeta + Kard Integration](https://www.getkard.com/docs/marqeta-kard-integration)
 - [Recommended User Experiences](#recommended-user-experiences)
    - [Discover a New Customer CLO](https://github.com/kard-financial/kard-postman#a-discover-a-new-customer-clo)
    - [Discover a Lapsed Customer CLO](https://github.com/kard-financial/kard-postman#b-discover-a-lapsed-customer-clo)
    - [Discover CLOs Near You (Map View)](https://github.com/kard-financial/kard-postman#c-discover-clos-near-you-map-view)   
    - [Trigger an Earned Reward Webhook](https://github.com/kard-financial/kard-postman#d-trigger-an-earned-reward-webhook)
 - [User Acceptance Test Cases](https://github.com/kard-financial/kard-postman#user-acceptance-test-cases)
+- [Historical Data Upload](https://docs.google.com/spreadsheets/d/18APeydg5Ebne_nVlxHchCG5wuNpii9O_EY5TikXCVLY/edit#gid=0)
 # How it Works
 
 ### I. Set up the Collection
