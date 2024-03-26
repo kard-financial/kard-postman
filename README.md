@@ -8,7 +8,7 @@ Welcome to the Kard Postman Collection! Use this collection for a quick and easy
    - [Cardholders](https://github.com/kard-financial/kard-postman#a-cardholders)
    - [Targeted Offers](https://github.com/kard-financial/kard-postman#b-targeted-offers)
    - [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching)
-   - [Marqeta + Kard Integration](https://github.com/kard-financial/kard-postman#Marqeta-+-Kard Integration)
+   - [Marqeta + Kard Integration](https://github.com/kard-financial/kard-postman#Marqeta-+-Kard-Integration)
 - [Recommended User Experiences](#recommended-user-experiences)
    - [Discover a New Customer CLO](https://github.com/kard-financial/kard-postman#a-discover-a-new-customer-clo)
    - [Discover a Lapsed Customer CLO](https://github.com/kard-financial/kard-postman#b-discover-a-lapsed-customer-clo)
