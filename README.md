@@ -4,6 +4,7 @@ Welcome to the Kard Postman Collection! Use this collection for a quick and easy
 
 ## Table of Contents
 - [How it Works](#how-it-works)
+- [Implementation Guide](#implementation-guide)
 - [Recommended Integration Patterns](#recommended-integration-patterns)
    - [Cardholders](https://github.com/kard-financial/kard-postman#a-cardholders)
    - [Targeted Offers](https://github.com/kard-financial/kard-postman#b-targeted-offers)
@@ -81,6 +82,13 @@ axios(config)
 });
 
 ```
+
+# Implementation Guide
+
+## Get Sandbox Access
+## Build backend application
+- Store `client_id` and `client_secret` securely and programmatically create `clientHash`
+## Test app with Kard sandbox
 
 # Recommended Integration Patterns
 
