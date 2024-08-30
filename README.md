@@ -405,6 +405,7 @@ Final transaction event: (2 of 2)
 }
 ```
 ### [IV. HMAC Signature Verification](https://developer.getkard.com/#operation/issuerEarnedRewardWebhook)
+
 An issuer will be provided a webhook key for both the sandbox and production environments.
 
 The webhook key is used to generate an HMAC of the webhook body. We calculate the HMAC and send it in the notify-signature header.
@@ -481,6 +482,12 @@ app.listen(port, () => {
  console.log(`Example app listening on port ${port}`);
 });
 ```
+
+### [V. Transaction Reconciliation](https://docs.google.com/document/d/1QjuDORosxzqix-8gpY_vfJnonB1r8chegRI_UV6emiU/edit?usp=sharing)
+- [S3 Access](https://docs.google.com/document/d/18h1rsKqD8ZTeiAlR3QISziR2uMdJ8DKW/edit)
+- Daily Reconciliation File
+- End of Month (EOM) Reconciliation File
+
 
 [# Marqeta + Kard Integration](https://www.getkard.com/docs/marqeta-kard-integration)
 ## Transactions
