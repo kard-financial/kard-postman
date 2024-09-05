@@ -502,11 +502,13 @@ There are two standard reports that Kard issues: Daily reconciliation files and 
   - file naming convention: `cardlinked-reconciliation-YYMM`
   - file format: `.csv`
       
-- Payout Options:
-   - Immediate Payout to End-Users
-      - Issuers may opt to disburse payments to their end-users immediately, or shortly after a transaction occurs. By selecting this option, the Issuer agrees to front the payment amounts to the end-users. Kard will reimburse the Issuer for these payments once Kard receives the corresponding commissions from the Merchants.
-   - Withheld Payments to End-Users
-      - Alternatively, Issuers may choose to withhold payments to their end-users until such time as they have received the corresponding commission payments from Kard. This option allows the Issuer to avoid fronting the payment amounts.    
+- Payouts:
+   - Merchants: Merchant terms are generally Net 30 across our merchant partners, but payment can be up to Net 90.
+   - Issuers: the product supports the 2 following options for payouts to end users. 
+      - Immediate
+         - Issuers may opt to disburse payments to their end-users immediately, or shortly after a transaction occurs. By selecting this option, the Issuer agrees to front the payment amounts to the end-users. Kard will reimburse the Issuer for these payments once Kard receives the corresponding commissions from the Merchants.
+      - Withheld
+         - Alternatively, Issuers may choose to withhold payments to their end-users until such time as they have received the corresponding commission payments from Kard. This option allows the Issuer to avoid fronting the payment amounts.    
 
 [# Marqeta + Kard Integration](https://www.getkard.com/docs/marqeta-kard-integration)
 ## Transactions
