@@ -484,10 +484,29 @@ app.listen(port, () => {
 ```
 
 ### [V. Transaction Reconciliation](https://docs.google.com/document/d/1QjuDORosxzqix-8gpY_vfJnonB1r8chegRI_UV6emiU/edit?usp=sharing)
-- [S3 Access](https://docs.google.com/document/d/18h1rsKqD8ZTeiAlR3QISziR2uMdJ8DKW/edit)
+There are two standard reports that Kard issues: Daily reconciliation files and end-of-month reconciliation files. Both of these files are shared via an S3 Bucket.
+
+- [S3 Access](https://docs.google.com/document/d/18h1rsKqD8ZTeiAlR3QISziR2uMdJ8DKW/edit): For information on how to access the S3 Bucket
 - Daily Reconciliation File
+
+   At the end of each day, a daily reconciliation file of transactions is automatically generated and shared to the S3 bucket under `/upload` by the Kard team.  All previous files are automatically moved to `/backup` for your team to reference. This file will be ideal for your team to compare against received webhooks and will act as a ledger until the EOM file is generated.
+  - The file is generated at 4:30 am EST. Note that this is generated at midnight UTC. That means it'll shift by an hour when we enter daylight savings.
+  - Previous files move to `/backup` when the new files are generated.  This makes sure the `/upload` directory only has one of each file.
+  - file naming convention: `cardlinked-reconciliation-YYMMDD`
+  - file format: `.json`
+ 
 - End of Month (EOM) Reconciliation File
 
+   On the 15th (or following business day in case the 15th should fall on a weekend or a holiday) each month, a monthly reconciliation file will be posted to the S3 bucket. This will include both pending and paid-in-full transactions from the month prior. Similar to the daily reconciliation file, the new monthly file will be uploaded to /upload by the Kard team and the previous files will be available in /backup.
+  - Previous files move to `/backup` when the new files are generated.  This makes sure the `/upload` directory only has one of each file.
+  - file naming convention: `cardlinked-reconciliation-YYMM`
+  - file format: `.csv`
+      
+- Payout Options:
+   - Immediate Payout to End-Users
+      - Issuers may opt to disburse payments to their end-users immediately, or shortly after a transaction occurs. By selecting this option, the Issuer agrees to front the payment amounts to the end-users. Kard will reimburse the Issuer for these payments once Kard receives the corresponding commissions from the Merchants.
+   - Withheld Payments to End-Users
+      - Alternatively, Issuers may choose to withhold payments to their end-users until such time as they have received the corresponding commission payments from Kard. This option allows the Issuer to avoid fronting the payment amounts.    
 
 [# Marqeta + Kard Integration](https://www.getkard.com/docs/marqeta-kard-integration)
 ## Transactions
