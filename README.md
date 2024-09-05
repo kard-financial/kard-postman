@@ -497,7 +497,7 @@ There are two standard reports that Kard issues: Daily reconciliation files and 
  
 - End of Month (EOM) Reconciliation File
 
-   On the 15th (or following business day in case the 15th should fall on a weekend or a holiday) each month, a monthly reconciliation file will be posted to the S3 bucket. This will include both pending and paid-in-full transactions from the month prior. Similar to the daily reconciliation file, the new monthly file will be uploaded to /upload by the Kard team and the previous files will be available in /backup.
+   On the 15th (or following business day in case the 15th should fall on a weekend or a holiday) each month, a monthly reconciliation file will be posted to the S3 bucket. Similar to the daily reconciliation file, the new monthly file will be uploaded to /upload by the Kard team and the previous files will be available in /backup. The EOM reconciliation report contains only SETTLED transactions that occurred in the previous month both PAID_IN_FULL and PENDING, as well as all PENDING transactions from all previous months that still have yet to be paid, and PAID_IN_FULL transactions from previous months that are being paid out that month.
   - Previous files move to `/backup` when the new files are generated.  This makes sure the `/upload` directory only has one of each file.
   - file naming convention: `cardlinked-reconciliation-YYMM`
   - file format: `.csv`
