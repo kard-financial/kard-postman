@@ -428,7 +428,7 @@ const secretKey = issuer_webhook_key; //provided in postman_environment.json
  
 const verifyToken = (req, res, next) => {
    // grab HMAC signature from Notify-signature header of request
-   const token = req.headers["notify-signature"];
+   const token = req.get("notify-signature");
  
    if (!token) {
        return res.status(403).send("A token is required for authentication");
